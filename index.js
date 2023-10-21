@@ -1,7 +1,7 @@
 const sftp = require("sftp-sync-deploy");
 
 /** @type {import("@types/hexo")} */
-hexo.extend.deployer.register("sftp", function(args) {
+hexo.extend.deployer.register("sftp", function (args) {
   if (!args.host || !args.user) {
     const help = [
       "You should argsure deployment settings in _config.yml first!",
@@ -21,7 +21,7 @@ hexo.extend.deployer.register("sftp", function(args) {
       "    concurrency: [number] # Max number of SFTP tasks processed concurrently. Default to 100.",
       "",
       "For more help, you can check the docs: " +
-        "https://hexo.io/docs/one-command-deployment",
+      "https://hexo.io/docs/one-command-deployment",
     ];
 
     console.log(help.join("\n"));
@@ -44,8 +44,9 @@ hexo.extend.deployer.register("sftp", function(args) {
   const options = {
     dryRun: !!args.dryrun,
     forceUpload: args.forceUpload,
-    excludeMode: "remove",
+    excludeMode: args.excludeMode,
     concurrency: args.concurrency || 100,
+    exclude: args.exclude || [],
     // exclude patterns (glob)
     // exclude: [
     //   'node_modules',
